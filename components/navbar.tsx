@@ -2,13 +2,21 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useClerk } from "@clerk/nextjs";
+import { useClerk} from "@clerk/nextjs";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showSignOutModal, setShowSignOutModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { signOut } = useClerk();
+
+  //always keep the first link as home!
+  const links = [
+    {href: "/home", name: "Home"},
+    {href: "/users/id", name:"Profile"},
+    {href: "posts/new", name:"Create Post"},
+    {href:"/settings", name:"Settings"}
+  ]
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -38,7 +46,7 @@ export default function Navbar() {
       <header className="relative z-50 border-b border-white/10 bg-slate-900/80 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
           <Link
-            href="/feed"
+            href={links[0].href}
             className="text-xl font-bold tracking-tight text-white transition hover:text-slate-200"
           >
             Snapboard
@@ -55,37 +63,16 @@ export default function Navbar() {
 
             {menuOpen && (
               <div className="absolute right-0 mt-2 w-56 rounded-xl border border-white/10 bg-slate-900/95 p-2 shadow-xl">
-                <Link
-                  href="/feed"
+                {links.map((elem, ind)=>(
+                  <Link
+                  href={elem.href}
                   className="block rounded-lg px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
                   onClick={() => setMenuOpen(false)}
-                >
-                  Home
-                </Link>
-
-                <Link
-                  href="/profile"
-                  className="mt-1 block rounded-lg px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Profile
-                </Link>
-
-                <Link
-                  href="/posts/new"
-                  className="mt-1 block rounded-lg px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Create a Post
-                </Link>
-
-                <Link
-                  href="/settings"
-                  className="mt-1 block rounded-lg px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Settings
-                </Link>
+                  key={ind}
+                  >
+                  {elem.name}
+                  </Link>
+                ))}
 
                 <div className="my-2 border-t border-white/10" />
 

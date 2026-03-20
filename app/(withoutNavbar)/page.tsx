@@ -5,10 +5,7 @@ import { motion } from "framer-motion";
 
 export default function HomePage() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4">
-      <div className="absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-purple-500 opacity-20 blur-3xl" />
-      <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-blue-500 opacity-20 blur-3xl" />
-
+    <div className="flex min-h-screen items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -36,7 +33,7 @@ export default function HomePage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6}}
+          transition={{ delay: 0.4, duration: 0.6 }}
           className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
           <Link
@@ -57,12 +54,12 @@ export default function HomePage() {
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.6}}
+          transition={{ delay: 0.5, duration: 0.6 }}
           className="mt-10 inline-block rounded-full border border-slate-700 bg-slate-800 px-4 py-2 text-xs text-slate-400"
         >
           Built with Next.js + TypeScript + Clerk + Prisma + Tailwind CSS + AWS
         </motion.div>
       </motion.div>
-    </main>
+    </div>
   );
 }
